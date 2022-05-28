@@ -1,0 +1,12 @@
+Angular
+https://blogs.halodoc.io/angular-best-practices/
+https://www.digitalocean.com/community/tutorials/using-sass-with-the-angular-cli
+https://angular-folder-structure.readthedocs.io/en/latest/#
+
+
+API 
+http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/
+
+
+SCSS : 
+https://sass-guidelin.es/#the-7-1-pattern
