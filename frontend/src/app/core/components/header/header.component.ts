@@ -1,48 +1,34 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { JobListing } from '../../models/job-listing.model';
 import { JobListingsService } from '../../services/job-listings.service';
+
 @Component({
-  selector: 'app-job-listings',
-  templateUrl: './job-listings.component.html',
-  styleUrls: ['./job-listings.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class JobListingsComponent implements OnInit {
-  public jobListings!: JobListing[];
-  public editJobListing!: JobListing ;
+export class HeaderComponent implements OnInit {
+  public editJobListing!: JobListing;
   public deleteJobListing!: JobListing;
+  public jobListings!: JobListing[];
+  constructor(private jobListingsService:JobListingsService) { }
 
-  constructor(private jobListingsService:JobListingsService ) { }
-
-  ngOnInit(){
-    this.getJobListings();
-
+  ngOnInit(): void {
+    this.getJobListings;
   }
 
   public getJobListings():void{
     this.jobListingsService.getJobListings().subscribe(
       (response: JobListing[])=>{
         this.jobListings = response;
+        console.log(this.jobListings);
       },(error: HttpErrorResponse) =>{
         alert(error.message);
       }
     )
   }
-  public onAddJobListings(addForm: NgForm): void {
-    document.getElementById('add-employee-form')!.click();
-    this.jobListingsService.addJobListings(addForm.value).subscribe(
-      (response: JobListing) => {
-        console.log(response);
-        this.getJobListings();
-        addForm.reset();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
-      }
-    );
-  }
+
 
 
   public searchEmployees(key: string): void {
@@ -61,8 +47,6 @@ export class JobListingsComponent implements OnInit {
       this.getJobListings();
     }
   }
-
-
 
 
   public onOpenModal(jL: JobListing, mode: string): void {
@@ -85,6 +69,5 @@ export class JobListingsComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
-
 
 }

@@ -27,7 +27,7 @@ public class JobListingsDTO {
     private String location;
 
     @NotNull
-    @Size(max = 255)
+    @Size(max = 4000)
     private String description;
 
     @Size(max = 255)

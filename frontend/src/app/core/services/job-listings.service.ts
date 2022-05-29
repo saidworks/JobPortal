@@ -8,24 +8,27 @@ import { JobListing } from '../models/job-listing.model';
   providedIn: 'root'
 })
 export class JobListingsService {
-  private apiUrl = environment.baseApiUrl;  
+  private apiUrl = environment.baseApiUrl + "jobListingss/";
   constructor(private http : HttpClient) { }
 
   public getJobListings(): Observable<JobListing[]>{
-    return this.http.get<JobListing[]>(`${this.apiUrl}/jobListings`);
+ return this.http.get<JobListing[]>(`${this.apiUrl}`,
+ {headers:
+  {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } }
+  );
   }
-  
+
   public addJobListings(jobListing:JobListing): Observable<JobListing>{
-    return this.http.post<JobListing>(`${this.apiUrl}/jobListings/`,jobListing);
+    return this.http.post<JobListing>(`${this.apiUrl}`,jobListing);
   }
-  
+
   public updateJobListings(jobListing:JobListing): Observable<JobListing>{
-    return this.http.post<JobListing>(`${this.apiUrl}/jobListings/${jobListing.id}`,jobListing);
+    return this.http.post<JobListing>(`${this.apiUrl}${jobListing.id}`,jobListing);
   }
 
   public deleteJobListings(jobListingId:number): Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/jobListings/${jobListingId}`);
+    return this.http.delete<void>(`${this.apiUrl}${jobListingId}`);
   }
-  
+
 
 }

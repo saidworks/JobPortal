@@ -5,5 +5,8 @@ export interface JobListing {
     location:string;
     description:string;
     nVacancies:string;
+    //need to change it to date after testing
     startDate:Date;
+
+
 }

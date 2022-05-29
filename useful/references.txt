@@ -3,6 +3,9 @@ https://blogs.halodoc.io/angular-best-practices/
 https://www.digitalocean.com/community/tutorials/using-sass-with-the-angular-cli
 https://angular-folder-structure.readthedocs.io/en/latest/#
 
+convert from string to date TS
+https://stackoverflow.com/questions/39925786/dates-in-a-typescript-interface-are-actually-strings-when-inspected
+https://www.munonye.com/working-with-date-formats-and-conversion-in-spring-boot-and-angular/
 
 API 
 http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/
@@ -10,3 +13,8 @@ http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/
 
 SCSS : 
 https://sass-guidelin.es/#the-7-1-pattern
+
+
+
+
+
