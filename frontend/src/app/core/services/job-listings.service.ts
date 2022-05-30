@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JobListing } from '../models/job-listing.model';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +25,8 @@ export class JobListingsService {
   }
 
   public updateJobListings(jobListing:JobListing): Observable<JobListing>{
-    return this.http.post<JobListing>(`${this.apiUrl}${jobListing.id}`,jobListing);
+    console.log(jobListing);
+    return this.http.put<JobListing>(`${this.apiUrl}${jobListing.id}`,jobListing);
   }
 
   public deleteJobListings(jobListingId:number): Observable<void>{

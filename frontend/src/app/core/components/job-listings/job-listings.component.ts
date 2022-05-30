@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { JobListing } from '../../models/job-listing.model';
 import { JobListingsService } from '../../services/job-listings.service';
+
+
 @Component({
   selector: 'app-job-listings',
   templateUrl: './job-listings.component.html',
@@ -31,6 +33,7 @@ export class JobListingsComponent implements OnInit {
   }
   public onAddJobListings(addForm: NgForm): void {
     document.getElementById('add-employee-form')!.click();
+    console.log(addForm.value);
     this.jobListingsService.addJobListings(addForm.value).subscribe(
       (response: JobListing) => {
         console.log(response);
@@ -42,8 +45,32 @@ export class JobListingsComponent implements OnInit {
         addForm.reset();
       }
     );
+    console.log('test')
   }
 
+  public onUpdateJobListings(jl: JobListing): void {
+    this.jobListingsService.updateJobListings(jl).subscribe(
+      (response: JobListing) => {
+        console.log(response);
+        this.getJobListings();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onDeleteJobListings(JobListingId: number): void {
+    this.jobListingsService.deleteJobListings(JobListingId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getJobListings();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
 
   public searchEmployees(key: string): void {
     console.log(key);
@@ -76,11 +103,11 @@ export class JobListingsComponent implements OnInit {
     }
     if (mode === 'edit') {
       this.editJobListing = jL;
-      button.setAttribute('data-target', '#updateEmployeeModal');
+      button.setAttribute('data-target', '#updateJobListingsModal');
     }
     if (mode === 'delete') {
       this.deleteJobListing = jL;
-      button.setAttribute('data-target', '#deleteEmployeeModal');
+      button.setAttribute('data-target', '#deleteJobListingsModal');
     }
     container?.appendChild(button);
     button.click();

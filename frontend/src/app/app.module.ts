@@ -9,6 +9,10 @@ import { JobListingsComponent } from './core/components/job-listings/job-listing
 import { JobListingsService } from './core/services/job-listings.service';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +24,7 @@ import { FooterComponent } from './core/components/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, HttpClientModule
+    FormsModule, HttpClientModule, NgbModule
   ],
   providers: [JobListingsService],
   bootstrap: [AppComponent]
