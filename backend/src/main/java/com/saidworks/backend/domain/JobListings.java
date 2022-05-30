@@ -31,7 +31,7 @@ public class JobListings {
     @Column(nullable = false)
     private String location;
 
-    @Column(nullable = false, name = "\"description\"")
+    @Column(nullable = false, name = "description")
     private String description;
 
     @Column

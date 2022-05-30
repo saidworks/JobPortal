@@ -3,8 +3,15 @@ package com.saidworks.backend.service;
 import com.saidworks.backend.domain.JobListings;
 import com.saidworks.backend.model.JobListingsDTO;
 import com.saidworks.backend.repos.JobListingsRepository;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
+
+import org.apache.tomcat.jni.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,6 +41,10 @@ public class JobListingsService {
 
     public Long create(final JobListingsDTO jobListingsDTO) {
         final JobListings jobListings = new JobListings();
+
+        LocalDate dt = LocalDate.now();
+        jobListings.setStartDate(dt);
+        System.out.println(jobListingsDTO.getTitle());
         mapToEntity(jobListingsDTO, jobListings);
         return jobListingsRepository.save(jobListings).getId();
     }
