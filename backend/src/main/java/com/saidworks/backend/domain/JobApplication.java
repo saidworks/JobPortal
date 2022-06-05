@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,7 +39,8 @@ public class JobApplication {
     @JoinColumn(name = "job_listings_id")
     private JobListings jobListings;
 
-    @OneToOne(mappedBy = "jobApplication", fetch = FetchType.LAZY)
-    private User jobApplication;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "one_user_id")
+    private User oneUser;
 
 }

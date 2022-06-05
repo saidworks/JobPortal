@@ -14,6 +14,18 @@ public class UserDTO {
 
     @NotNull
     @Size(max = 255)
+    private String email;
+
+    @NotNull
+    @Size(max = 255)
+    private String password;
+
+    @NotNull
+    @Size(max = 255)
+    private String username;
+
+    @NotNull
+    @Size(max = 255)
     private String firstName;
 
     @NotNull
@@ -30,7 +42,5 @@ public class UserDTO {
     private Long address;
 
     private Long resume;
-
-    private Long jobApplication;
 
 }

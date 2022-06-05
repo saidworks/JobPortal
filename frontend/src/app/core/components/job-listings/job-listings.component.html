@@ -4,11 +4,12 @@
       <div *ngFor="let jobListing of jobListings" class="col-lg-6 col-xl-6">
          <div class="card m-3">
                <div class="col-6 card-title align-self-center mb-0">
-                  <h5>{{jobListing?.title}}</h5>
-                  <p class="m-0">{{jobListing?.description}}</p>
+                  <h3>{{jobListing?.title}}</h3>
+                 <h5>{{jobListing?.company}}</h5>
                </div>
         </div>
             <ul class="list-group list-group-flush">
+              <li> <p class="m-0">{{jobListing?.description}}</p></li>
                <li class="list-group-item"><i class="fa-solid fa-tally-1"></i> Number of Vacancies: {{jobListing?.nVacancies}}</li>
                <li class="list-group-item"><i class="fa-solid fa-alarm-clock"></i> StartDate : {{jobListing?.startDate}}</li>
             </ul>

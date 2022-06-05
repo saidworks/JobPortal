@@ -42,9 +42,6 @@ public class JobListingsService {
     public Long create(final JobListingsDTO jobListingsDTO) {
         final JobListings jobListings = new JobListings();
 
-        LocalDate dt = LocalDate.now();
-        jobListings.setStartDate(dt);
-        System.out.println(jobListingsDTO.getTitle());
         mapToEntity(jobListingsDTO, jobListings);
         return jobListingsRepository.save(jobListings).getId();
     }

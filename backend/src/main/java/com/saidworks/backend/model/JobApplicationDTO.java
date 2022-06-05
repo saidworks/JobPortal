@@ -27,4 +27,6 @@ public class JobApplicationDTO {
 
     private Long jobListings;
 
+    private Long oneUser;
+
 }

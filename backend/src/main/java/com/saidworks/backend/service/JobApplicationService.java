@@ -2,9 +2,11 @@ package com.saidworks.backend.service;
 
 import com.saidworks.backend.domain.JobApplication;
 import com.saidworks.backend.domain.JobListings;
+import com.saidworks.backend.domain.User;
 import com.saidworks.backend.model.JobApplicationDTO;
 import com.saidworks.backend.repos.JobApplicationRepository;
 import com.saidworks.backend.repos.JobListingsRepository;
+import com.saidworks.backend.repos.UserRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
@@ -17,11 +19,14 @@ public class JobApplicationService {
 
     private final JobApplicationRepository jobApplicationRepository;
     private final JobListingsRepository jobListingsRepository;
+    private final UserRepository userRepository;
 
     public JobApplicationService(final JobApplicationRepository jobApplicationRepository,
-            final JobListingsRepository jobListingsRepository) {
+                                 final JobListingsRepository jobListingsRepository,
+                                 final UserRepository userRepository) {
         this.jobApplicationRepository = jobApplicationRepository;
         this.jobListingsRepository = jobListingsRepository;
+        this.userRepository = userRepository;
     }
 
     public List<JobApplicationDTO> findAll() {
@@ -55,18 +60,19 @@ public class JobApplicationService {
     }
 
     private JobApplicationDTO mapToDTO(final JobApplication jobApplication,
-            final JobApplicationDTO jobApplicationDTO) {
+                                       final JobApplicationDTO jobApplicationDTO) {
         jobApplicationDTO.setId(jobApplication.getId());
         jobApplicationDTO.setUser(jobApplication.getUser());
         jobApplicationDTO.setJobListing(jobApplication.getJobListing());
         jobApplicationDTO.setApplicationDate(jobApplication.getApplicationDate());
         jobApplicationDTO.setResumeId(jobApplication.getResumeId());
         jobApplicationDTO.setJobListings(jobApplication.getJobListings() == null ? null : jobApplication.getJobListings().getId());
+        jobApplicationDTO.setOneUser(jobApplication.getOneUser() == null ? null : jobApplication.getOneUser().getId());
         return jobApplicationDTO;
     }
 
     private JobApplication mapToEntity(final JobApplicationDTO jobApplicationDTO,
-            final JobApplication jobApplication) {
+                                       final JobApplication jobApplication) {
         jobApplication.setUser(jobApplicationDTO.getUser());
         jobApplication.setJobListing(jobApplicationDTO.getJobListing());
         jobApplication.setApplicationDate(jobApplicationDTO.getApplicationDate());
@@ -75,6 +81,11 @@ public class JobApplicationService {
             final JobListings jobListings = jobListingsRepository.findById(jobApplicationDTO.getJobListings())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "jobListings not found"));
             jobApplication.setJobListings(jobListings);
+        }
+        if (jobApplicationDTO.getOneUser() != null && (jobApplication.getOneUser() == null || !jobApplication.getOneUser().getId().equals(jobApplicationDTO.getOneUser()))) {
+            final User oneUser = userRepository.findById(jobApplicationDTO.getOneUser())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "oneUser not found"));
+            jobApplication.setOneUser(oneUser);
         }
         return jobApplication;
     }
