@@ -33,7 +33,6 @@ export class JobListingsComponent implements OnInit {
   }
   public onAddJobListings(addForm: NgForm): void {
     document.getElementById('add-employee-form')!.click();
-    console.log(addForm.value);
     this.jobListingsService.addJobListings(addForm.value).subscribe(
       (response: JobListing) => {
         console.log(response);
