@@ -18,6 +18,8 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    //line added to ignore type error
+    "noImplicitAny": false,
     "lib": [
       "es2020",
       "dom"

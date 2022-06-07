@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,7 @@ import { JobListingsService } from './core/services/job-listings.service';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from './core/components/register/register.component';
 
 
 
@@ -19,12 +20,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     JobListingsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, HttpClientModule, NgbModule
+    FormsModule, HttpClientModule, NgbModule,
+    ReactiveFormsModule
   ],
   providers: [JobListingsService],
   bootstrap: [AppComponent]
