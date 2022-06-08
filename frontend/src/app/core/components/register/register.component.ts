@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
       lastName: new FormControl(null,[Validators.required,Validators.minLength(3)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      course: new FormControl(null,[Validators.required,Validators.minLength(5)]),
-      campus: new FormControl(null,[Validators.required,Validators.minLength(5)]),
+      course: new FormControl(null,[Validators.required]),
+      campus: new FormControl(null),
       roleSelection: this.createRoles(this.roles)
     });
   }
@@ -40,7 +40,8 @@ export class RegisterComponent implements OnInit {
     const arr = roleList.map((role: any)=> {
       return new FormControl(role.selected)
     }) ;
-    return new FormArray(arr);
+    let roles = new FormArray(arr);
+    return roles;
   }
 
   onSubmit(){
@@ -52,8 +53,9 @@ export class RegisterComponent implements OnInit {
     this.user.password = this.registrationForm.value.password;
     this.user.campus = this.registrationForm.value.campus;
     this.user.course = this.registrationForm.value.course;
-    //console.log(this.getSelectedRoles());
+    console.log(this.getSelectedRoles());
     this.user.roles = this.getSelectedRoles();
+    console.log(this.user);
     this.registerUser()
   }
   // testing new syntax
@@ -65,7 +67,7 @@ export class RegisterComponent implements OnInit {
         this.isRegistered = true;
       },
       error: (err:HttpErrorResponse)=>{
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.message;
         this.isRegistered = false;
       }
     })
@@ -75,7 +77,7 @@ export class RegisterComponent implements OnInit {
     this.selectedRoles = this.registrationForm.value.roleSelection
     .map((selected,i) => {
       if(selected){
-        return this.roles[i].name;
+        return this.roles[i].roleName;
       }
       else{
         return '';
@@ -84,7 +86,9 @@ export class RegisterComponent implements OnInit {
     //return selected roles
     return this.selectedRoles.filter(function(element){
       if(element !== ''){
+        console.log(element);
         return element;
+
       }
       return [];
     })

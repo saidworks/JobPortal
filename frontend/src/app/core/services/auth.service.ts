@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 
 
-const headers = new HttpHeaders().set('Content-Type','application/json');
+const headers = new HttpHeaders().set('Content-Type','application/json').set('Access-Control-Allow-Origin', 'http://localhost:8080/api/auth/signup');
 
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private http:HttpClient, private router:Router) {}
 
   signup(user: User): Observable<any>{
-    console.log("in AuthService - sign up");
+    console.log("in AuthService - sign up" + this.baseUrl+"signup");
     return this.http.post(this.baseUrl+'signup',user,{ headers, responseType: 'text'})
       .pipe(catchError(this.handleError));
     }

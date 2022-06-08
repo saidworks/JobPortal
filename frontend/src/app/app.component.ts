@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+
+  constructor(private authService: AuthService){}
+  // //isLoggedIn = false;
+  // username: string = '';
+  // ngOnInit(): void {
+  //   //this.isLoggedIn = this.authService.isLoggedIn();
+  // }
+  // getUserName(){
+  //    return sessionStorage.getItem("username");
+  // }
+  // onLogOut(){
+  //   this.authService.logout();
+  // }
+
+  // loggedIn(){
+  //   return this.authService.isLoggedIn()
+  // }
 }
