@@ -17,6 +17,7 @@ import com.saidworks.backend.repos.RoleRepository;
 import com.saidworks.backend.repos.UserRepository;
 import com.saidworks.backend.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,11 +25,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
-@RequestMapping("api/auth")
+@RequestMapping(value="api/auth")
 public class AuthController {
     @Autowired
     UserRepository userRepository;
@@ -76,7 +75,7 @@ public class AuthController {
         user.setLastName(signupRequest.getLastName());
         user.setCourse(signupRequest.getCourse());
         user.setCampus(signupRequest.getCampus());
-        //System.out.println("Encoded password--- " + user.getPassword());
+        System.out.println("Encoded password--- " + user.getPassword());
         String[] roleArr = signupRequest.getRoles();
         System.out.println(Arrays.toString(roleArr));
         System.out.println(roleRepository.findByRoleName(Roles.ROLE_USER).get());
@@ -85,16 +84,18 @@ public class AuthController {
         }
         for(String role: roleArr) {
             switch(role) {
-                case "admin":
+                case "Admin":
                     roles.add(roleRepository.findByRoleName(Roles.ROLE_ADMIN).get());
                     break;
-                case "user":
+                case "User":
                     System.out.println(Roles.ROLE_USER);
+                    System.out.println(roleRepository.findByRoleName(Roles.ROLE_USER).isPresent());
                     if(roleRepository.findByRoleName(Roles.ROLE_USER).isPresent()){
                     roles.add(roleRepository.findByRoleName(Roles.ROLE_USER).get());}
                     break;
-                default:
-                    return ResponseEntity.badRequest().body("Specified role not found");
+                    //I need to add condition because default run anytime
+//                default:
+//                    return ResponseEntity.badRequest().body("Specified role not found");
             }
         }
         user.setRoles(roles);
