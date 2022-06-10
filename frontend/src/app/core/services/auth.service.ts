@@ -26,7 +26,7 @@ export class AuthService {
     login(user: string, password: string){
       // console.log('In AuthService -  login');
        return this.http.post<any>(this.baseUrl + 'login',
-           {userName: user, password:password}, {headers})
+           {username: user, password:password}, {headers})
            .pipe(catchError(this.handleError),
                map(userData => {
                  sessionStorage.setItem("username", user);

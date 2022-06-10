@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +11,9 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './core/components/register/register.component';
-
+import { LoginComponent } from './core/components/login/login.component';
+import { AuthService } from './core/services/auth.service';
+import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 
 
 
@@ -21,7 +23,8 @@ import { RegisterComponent } from './core/components/register/register.component
     JobListingsComponent,
     HeaderComponent,
     FooterComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { RegisterComponent } from './core/components/register/register.component
     FormsModule, HttpClientModule, NgbModule,
     ReactiveFormsModule
   ],
-  providers: [JobListingsService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

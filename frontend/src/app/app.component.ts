@@ -9,11 +9,11 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
 
   constructor(private authService: AuthService){}
-  // //isLoggedIn = false;
+  // isLoggedIn = false;
   // username: string = '';
-  // ngOnInit(): void {
-  //   //this.isLoggedIn = this.authService.isLoggedIn();
-  // }
+  ngOnInit(): void {
+    // this.isLoggedIn = this.authService.isLoggedIn();
+  }
   // getUserName(){
   //    return sessionStorage.getItem("username");
   // }

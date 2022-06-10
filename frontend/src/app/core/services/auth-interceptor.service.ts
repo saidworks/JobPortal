@@ -12,9 +12,10 @@ export class AuthInterceptorService implements HttpInterceptor {
     if(sessionStorage.getItem('username') && sessionStorage.getItem('token')){
       console.log("with Token --" + sessionStorage.getItem('token'))
       modifiedReq = req.clone({
-        headers: req.headers.set('Authorization', sessionStorage.getItem('token') || "")
+        headers: req.headers.set('Authorization', sessionStorage.getItem('token')!)
       });
     }
+    console.log(modifiedReq);
     return next.handle(modifiedReq);
   }
 

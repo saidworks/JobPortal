@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { JobListing } from '../../models/job-listing.model';
+import { AuthService } from '../../services/auth.service';
 import { JobListingsService } from '../../services/job-listings.service';
 
 @Component({
@@ -12,10 +13,27 @@ export class HeaderComponent implements OnInit {
   public editJobListing!: JobListing;
   public deleteJobListing!: JobListing;
   public jobListings!: JobListing[];
-  constructor(private jobListingsService:JobListingsService) { }
+  isLoggedIn = false;
+  username: string = '';
+
+  constructor(private jobListingsService:JobListingsService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.getJobListings;
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+
+
+  getUserName(){
+     return sessionStorage.getItem("username");
+  }
+  onLogOut(){
+    this.authService.logout();
+  }
+
+  loggedIn(){
+    return this.authService.isLoggedIn()
   }
 
   public getJobListings():void{
