@@ -28,12 +28,12 @@ public class CustomUserBean implements UserDetails {
     @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    CustomUserBean(Long id, String userName, String email,
+    CustomUserBean(Long id, String username, String email,
                    String password, String firstName,String lastName,
                    String course,String campus,
                    Collection<? extends GrantedAuthority> authorities){
         this.id = id;
-        this.username = userName;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
