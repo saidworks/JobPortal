@@ -1,12 +1,9 @@
-<div class="col-xs-12 col-sm-10 col-md-8">
-  <div class="card">
-    <div class="card-header">
-      <h2>User Signup</h2>
-    </div>
-    <div class="card-body">
+<main class="form-signin w-100 mt-5 m-auto text-center">
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+        <h1 class="mb-3 display-5">Register</h1>
         <!-- username -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label for="username">User Name</label>
           <input type="text" class="form-control" id="username"
             formControlName="username">
@@ -24,7 +21,7 @@
           </div>
         </div>
         <!-- firstname -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label for="firstName">First Name</label>
           <input type="text" class="form-control" id="firstName"
             formControlName="firstName">
@@ -39,7 +36,7 @@
           </div>
         </div>
         <!-- lastname -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label for="lastName">Last name</label>
           <input type="text" class="form-control" id="lastName"
             formControlName="lastName">
@@ -54,7 +51,7 @@
           </div>
         </div>
         <!-- password -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label for="email">email</label>
           <input type="email" class="form-control" id="email"
           formControlName="email">
@@ -64,7 +61,7 @@
           </div>
         </div>
         <!-- password -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password"
           formControlName="password">
@@ -79,7 +76,7 @@
           </div>
         </div>
         <!-- course -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label for="course">Course</label>
           <input type="text" class="form-control" id="course"
             formControlName="course">
@@ -92,14 +89,14 @@
         </div>
 
       <!-- campus -->
-      <div class="form-group">
+      <div class="form-floating mb-1">
         <label for="campus">Campus</label>
         <input type="text" class="form-control" id="campus"
           formControlName="campus">
       </div>
 
         <!-- user roles -->
-        <div class="form-group">
+        <div class="form-floating mb-1">
           <label>User Roles</label>
             <div class="form-check"
             *ngFor="let role of registrationForm.get('roleSelection')?.['controls']; let i = index">
@@ -110,7 +107,7 @@
               </label>
             </div>
         </div>
-        <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-success">Sign Up</button>
+        <button type="submit" [disabled]="registrationForm.invalid" class="w-100 btn btn-lg btn-success">Sign Up</button>
         <div class="alert alert-warning" *ngIf="submitted && !isRegistered">
           Signup failed- {{ errorMessage }}
         </div>
@@ -118,6 +115,5 @@
       <div class="alert alert-success" *ngIf="isRegistered">
         Your registration is successful!
       </div>
-    </div>
-  </div>
-</div>
+      <p class="mt-5 mb-3 text-muted">S/Z &copy; 2022</p>
+</main>

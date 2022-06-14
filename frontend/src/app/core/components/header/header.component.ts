@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   getUserName(){
      return sessionStorage.getItem("username");
   }
-  onLogOut(){
+  onLogOut():void{
     this.authService.logout();
   }
 

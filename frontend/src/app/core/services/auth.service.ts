@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private http:HttpClient, private router:Router) {}
 
   signup(user: User): Observable<any>{
-    console.log("in AuthService - sign up" + this.baseUrl+"signup");
+    //console.log("in AuthService - sign up" + this.baseUrl+"signup");
     return this.http.post(this.baseUrl+'signup',user,{ headers, responseType: 'text'})
       .pipe(catchError(this.handleError));
     }
@@ -31,10 +31,9 @@ export class AuthService {
                map(userData => {
                  sessionStorage.setItem("username", user);
                  let tokenStr = "Bearer " + userData.token;
-                 console.log("Token---  " + tokenStr);
+                 //console.log("Token---  " + tokenStr);
                  sessionStorage.setItem("token", tokenStr);
                  sessionStorage.setItem("roles", JSON.stringify(userData.roles));
-                 console.log(userData);
                  return userData;
                })
            );
@@ -43,7 +42,8 @@ export class AuthService {
 
    logout(){
      sessionStorage.clear();
-     this.router.navigate(['/login']);
+     console.log("log out")
+     this.router.navigate(['']);
    }
 
    isLoggedIn():boolean {

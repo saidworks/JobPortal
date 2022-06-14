@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   errorMessage = "";
   isLoggedIn = false;
   isLoginFailed = false;
+
   constructor(private authService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm?.value.username,this.loginForm?.value.password).subscribe(
       data => {
         this.isLoggedIn = true;
-        this.router.navigate(['']);
+        this.profileSwitch();
       },
       error => {
         console.log(error);
@@ -37,6 +38,19 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     )
+  }
+
+  profileSwitch(){
+    let roles:string[] = JSON.parse(sessionStorage.getItem("roles")!);
+    if(roles.length>0 && this.isLoggedIn){
+      for(let role of roles){
+        if(role=="ROLE_ADMIN"){
+          console.log("Admin");
+          this.router.navigate(['/home']);
+        }
+
+      }
+   }
   }
 
 }
