@@ -34,7 +34,8 @@ import { ResumeComponent } from './core/components/resume/resume.component';
     FormsModule, HttpClientModule, NgbModule,
     ReactiveFormsModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+              JobListingsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

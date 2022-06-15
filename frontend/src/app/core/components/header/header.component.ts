@@ -24,7 +24,17 @@ export class HeaderComponent implements OnInit {
   }
 
 
-
+  isAdmin(){
+    let roles:string[] = JSON.parse(sessionStorage.getItem("roles")!);
+    if(roles?.length != null && this.isLoggedIn){
+      for(let role of roles){
+        if(role=="ROLE_ADMIN"){
+          return true;
+        }
+      }
+   }
+   return false;
+  }
   getUserName(){
      return sessionStorage.getItem("username");
   }
