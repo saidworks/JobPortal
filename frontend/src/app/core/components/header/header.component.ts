@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { JobListing } from '../../models/job-listing.model';
+import { JobListing } from '../../admin/models/job-listing.model';
 import { AuthService } from '../../services/auth.service';
-import { JobListingsService } from '../../services/job-listings.service';
+import { JobListingsService } from '../../admin/services/job-listings.service';
 
 @Component({
   selector: 'app-header',

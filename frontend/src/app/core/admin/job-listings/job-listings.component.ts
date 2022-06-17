@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { JobListing } from '../../models/job-listing.model';
-import { JobListingsService } from '../../services/job-listings.service';
+import { JobListing } from '../models/job-listing.model';
+import { JobListingsService } from '../services/job-listings.service';
 
 
 @Component({
