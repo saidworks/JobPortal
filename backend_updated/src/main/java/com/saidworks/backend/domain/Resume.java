@@ -24,15 +24,12 @@ public class Resume {
     private Long id;
 
     @Column(nullable = false)
-    private Integer userId;
-
-    @Column(nullable = false)
     private String headline;
 
     @Column(nullable = false, name = "\"path\"")
     private String path;
     @JsonBackReference
     @OneToOne(mappedBy = "resume", fetch = FetchType.LAZY)
-    private User resume;
+    private User user;
 
 }

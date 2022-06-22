@@ -13,9 +13,6 @@ public class ResumeDTO {
     private Long id;
 
     @NotNull
-    private Integer userId;
-
-    @NotNull
     @Size(max = 255)
     private String headline;
 

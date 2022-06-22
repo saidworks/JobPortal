@@ -1,2 +1,4 @@
-package com.saidworks.backend.controller;public class AdminController {
+package com.saidworks.backend.controller;
+
+public class AdminController {
 }
