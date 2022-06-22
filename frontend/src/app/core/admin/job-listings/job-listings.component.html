@@ -60,7 +60,7 @@
                  <input type="text" ngModel name="nVacancies" class="form-control" id="imageUrl" placeholder="Number of Vacancies" required>
               </div>
               <div class="modal-footer">
-                 <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" id="add-jobListings-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
                  <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
               </div>
               </form>
@@ -111,7 +111,7 @@
                 <input type="text" ngModel="{{editJobListing?.nVacancies}}" name="nVacancies" class="form-control" id="imageUrl" placeholder="Number of Vacancies" required>
               </div>
               <div class="modal-footer">
-                <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="modify-jobListings-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button data-dismiss="modal" (click)="onUpdateJobListings(editForm.value)" type="submit" class="btn btn-primary" >Save changes</button>
               </div>
               </form>

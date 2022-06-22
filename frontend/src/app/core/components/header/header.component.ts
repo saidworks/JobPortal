@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(private jobListingsService:JobListingsService,private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.getJobListings;
+    this.getJobListings();
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 

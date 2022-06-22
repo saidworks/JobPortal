@@ -14,7 +14,7 @@ import { RegisterComponent } from './core/components/register/register.component
 import { LoginComponent } from './core/components/login/login.component';
 import { AuthService } from './core/services/auth.service';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
-import { ResumeComponent } from './core/components/resume/resume.component';
+import { ResumeComponent } from './core/user/resume/resume.component';
 
 
 
