@@ -2,6 +2,7 @@ package com.saidworks.backend.service;
 
 import com.saidworks.backend.domain.Resume;
 import com.saidworks.backend.domain.User;
+import com.saidworks.backend.model.CustomUserBean;
 import com.saidworks.backend.model.ResumeDTO;
 import com.saidworks.backend.repos.ResumeRepository;
 import java.util.List;
@@ -17,9 +18,11 @@ import org.springframework.web.server.ResponseStatusException;
 public class ResumeService {
 
     private final ResumeRepository resumeRepository;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public ResumeService(final ResumeRepository resumeRepository) {
+    public ResumeService(final ResumeRepository resumeRepository,UserDetailsServiceImpl userDetailsServiceImpl) {
         this.resumeRepository = resumeRepository;
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
     public List<ResumeDTO> findAll() {
@@ -39,11 +42,12 @@ public class ResumeService {
     }
 
     public Long create(final ResumeDTO resumeDTO) {
-        Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserBean userDetails = (CustomUserBean) authentication.getPrincipal();
+        User user = userDetails.getUser();
         final Resume resume = new Resume();
         resume.setUser(user);
+        System.out.println(resume);
         mapToEntity(resumeDTO, resume);
         return resumeRepository.save(resume).getId();
     }

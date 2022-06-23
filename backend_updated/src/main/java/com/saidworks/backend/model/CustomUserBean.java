@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CustomUserBean implements UserDetails {
     private static final long serialVersionUID = -4709084843450077569L;
+    private User user;
     private Long id;
     private String email;
 
@@ -123,5 +124,13 @@ public class CustomUserBean implements UserDetails {
     @Override
     public int hashCode() {
         return username.hashCode();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

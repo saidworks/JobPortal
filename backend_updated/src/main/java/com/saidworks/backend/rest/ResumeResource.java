@@ -26,7 +26,7 @@ public class ResumeResource {
         return ResponseEntity.ok(resumeService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/mycv")
     public ResponseEntity<ResumeDTO> getResume() {
         return ResponseEntity.ok(resumeService.get());
     }

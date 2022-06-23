@@ -2,10 +2,12 @@ package com.saidworks.backend.service;
 
 import javax.transaction.Transactional;
 
+import com.saidworks.backend.domain.Role;
 import com.saidworks.backend.domain.User;
 import com.saidworks.backend.model.CustomUserBean;
 import com.saidworks.backend.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,4 +26,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         + "user name "+ username + " not found"));
         return CustomUserBean.createInstance(user);
     }
+
+
 }
