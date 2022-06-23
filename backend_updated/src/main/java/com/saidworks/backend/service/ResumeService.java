@@ -4,9 +4,13 @@ import com.saidworks.backend.domain.Resume;
 import com.saidworks.backend.domain.User;
 import com.saidworks.backend.model.CustomUserBean;
 import com.saidworks.backend.model.ResumeDTO;
+import com.saidworks.backend.model.UserDTO;
 import com.saidworks.backend.repos.ResumeRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.saidworks.backend.repos.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,9 +24,14 @@ public class ResumeService {
     private final ResumeRepository resumeRepository;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public ResumeService(final ResumeRepository resumeRepository,UserDetailsServiceImpl userDetailsServiceImpl) {
+    private final UserRepository userRepository;
+
+    public ResumeService(final ResumeRepository resumeRepository,
+            UserRepository userRepository,
+                         UserDetailsServiceImpl userDetailsServiceImpl) {
         this.resumeRepository = resumeRepository;
         this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.userRepository = userRepository;
     }
 
     public List<ResumeDTO> findAll() {
@@ -33,9 +42,10 @@ public class ResumeService {
     }
 
     public ResumeDTO get() {
-       Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
-       User user = (User) authentication.getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserBean userDetails = (CustomUserBean) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findByUsername(username).get();
         return resumeRepository.findByUser(user)
                 .map(resume -> mapToDTO(resume, new ResumeDTO()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -44,11 +54,14 @@ public class ResumeService {
     public Long create(final ResumeDTO resumeDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserBean userDetails = (CustomUserBean) authentication.getPrincipal();
-        User user = userDetails.getUser();
+        String username = userDetails.getUsername();
+        User user = userRepository.findByUsername(username).get();
         final Resume resume = new Resume();
-        resume.setUser(user);
-        System.out.println(resume);
         mapToEntity(resumeDTO, resume);
+        System.out.println(resume);
+        user.setResume(resume);
+        //userRepository.save(user);
+        resume.setUser(user);
         return resumeRepository.save(resume).getId();
     }
 
