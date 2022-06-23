@@ -1,76 +1,143 @@
-<main class="form-signin w-100 mt-5 m-auto text-center">
-  <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
-    <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
-    <h1 class="mb-3 display-5">Add your resume</h1>
+<div id="main-container">
+  <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add your Resume <span class="sr-only">(current)</span></a>
 
-    <!-- headline -->
-    <div class="form-floating mb-1">
-      <label for="headline">Headline</label>
-      <input type="text" class="form-control" id="headline"
-        formControlName="headline">
-      <div class="alert alert-danger" *ngIf="resumeForm.get('headline')?.invalid
-        && resumeForm.get('headline')?.touched">
-        <div *ngIf="resumeForm.get('headline')?.errors?.['required']">
-          Headline is required
-        </div>
-        <div *ngIf="resumeForm.get('headline')?.errors?.['minlength']">
-          Headline must be at least 3 characters long
+      <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{resume?.headline}}</h5>
+
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Path: {{resume?.path}}</li>
+            </ul>
+            <div class="card-body">
+              <a (click)="onOpenModal(resume, 'edit')" class="btn btn-primary tooltips m-2" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+              <a (click)="onOpenModal(resume, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+
+          </div>
+      </div>
+      <!-- Add Resume Modal -->
+      <div class="modal fade" id="addResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addEmployeeModalLabel">Add Job Listings</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <h1 class="mb-3 display-5">Add your resume</h1>
+
+                <!-- headline -->
+                <div class="form-floating mb-1">
+                  <label for="headline">Headline</label>
+                  <input type="text" class="form-control" id="headline"
+                    formControlName="headline">
+                  <div class="alert alert-danger" *ngIf="resumeForm.get('headline')?.invalid
+                    && resumeForm.get('headline')?.touched">
+                    <div *ngIf="resumeForm.get('headline')?.errors?.['required']">
+                      Headline is required
+                    </div>
+                    <div *ngIf="resumeForm.get('headline')?.errors?.['minlength']">
+                      Headline must be at least 3 characters long
+                    </div>
+                  </div>
+                </div>
+                <!-- path -->
+                <div class="form-floating mb-1">
+                  <label for="path">Link to your resume</label>
+                  <input type="text" class="form-control" id="path"
+                    formControlName="path">
+                  <div class="alert alert-danger" *ngIf="resumeForm.get('path')?.invalid
+                    && resumeForm.get('path')?.touched">
+                    <div *ngIf="resumeForm.get('path')?.errors?.['required']">
+                      Link to your resume is required
+                    </div>
+                    <div *ngIf="resumeForm.get('path')?.errors?.['minlength']">
+                      Link to your resume must be at least 3 characters long
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" [disabled]="resumeForm.invalid" class="w-100 btn btn-lg btn-success">Save</button>
+
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- path -->
-    <div class="form-floating mb-1">
-      <label for="path">Link to your resume</label>
-      <input type="text" class="form-control" id="path"
-        formControlName="path">
-      <div class="alert alert-danger" *ngIf="resumeForm.get('path')?.invalid
-        && resumeForm.get('path')?.touched">
-        <div *ngIf="resumeForm.get('path')?.errors?.['required']">
-          Link to your resume is required
-        </div>
-        <div *ngIf="resumeForm.get('path')?.errors?.['minlength']">
-          Link to your resume must be at least 3 characters long
+
+
+       <!-- Update Resume Modal -->
+       <div class="modal fade" id="updateResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addEmployeeModalLabel">Add Job Listings</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #editForm="ngForm">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <h1 class="mb-3 display-5">Modify your resume</h1>
+                  <!-- id -->
+                  <div class="form-floating mb-1">
+                    <label for="headline">id</label>
+                    <input type="number" class="form-control" name="id" id="id" ngModel="{{editResume?.id}}">
+                  </div>
+                <!-- headline -->
+                <div class="form-floating mb-1">
+                  <label for="headline">Headline</label>
+                  <input type="text" class="form-control" name="headline" id="headline" ngModel="{{editResume?.headline}}">
+                </div>
+                <!-- path -->
+                <div class="form-floating mb-1">
+                  <label for="path">Link to your resume</label>
+                  <input type="text" class="form-control" name="path" id="path" ngModel="{{editResume?.path}}">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="modify-resume-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button data-dismiss="modal" type="submit" class="w-100 btn btn-lg btn-success"
+                  (click)="updateResume(editForm.value)">Save changes</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <button type="submit" [disabled]="resumeForm.invalid" class="w-100 btn btn-lg btn-success">Save</button>
 
-  </form>
+      <!-- delete Modal -->
+      <div class="modal fade" id="deleteResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <h1 class="mb-3 display-5">delete your resume</h1>
+                <p> are you sure you want to delete your resume</p>
+                <div class="modal-footer">
+                  <button type="button" id="modify-resume-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button data-dismiss="modal" type="submit" class="w-100 btn btn-lg btn-success"
+                  (click)="removeResume(resume)">Save changes</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
   <p class="mt-5 mb-3 text-muted">S/Z &copy; 2022</p>
-</main>
-
-
-<!--
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 </div>
 
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-  <span class="input-group-text" id="basic-addon2">@example.com</span>
-</div>
-
-<label for="basic-url" class="form-label">Your vanity URL</label>
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-</div>
-
-<div class="input-group mb-3">
-  <span class="input-group-text">$</span>
-  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-  <span class="input-group-text">.00</span>
-</div>
-
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username">
-  <span class="input-group-text">@</span>
-  <input type="text" class="form-control" placeholder="Server" aria-label="Server">
-</div>
-
-<div class="input-group">
-  <span class="input-group-text">With textarea</span>
-  <textarea class="form-control" aria-label="With textarea"></textarea>
-</div> -->

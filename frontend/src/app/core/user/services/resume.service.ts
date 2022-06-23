@@ -19,18 +19,27 @@ export class ResumeService {
   }
 
   public getResume(): Observable<Resume> {
-    return this.http.get<Resume>(`${this.apiUrl}$mycv`);
+    return this.http.get<Resume>(`${this.apiUrl}mycv`,
+    {headers:
+      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
   }
 
   public addResume(resume:Resume):Observable<Resume>{
-    return this.http.post<Resume>(`${this.apiUrl}`,resume);
+    console.log("I am in service" + resume);
+    return this.http.post<Resume>(`${this.apiUrl}`,resume,
+    {headers:
+      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
   }
   public updateResume(resume:Resume):Observable<Resume>{
-    return this.http.put<Resume>(`${this.apiUrl}${resume.id}`,resume);
+    return this.http.put<Resume>(`${this.apiUrl}${resume.id}`,resume,
+    {headers:
+      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
   }
 
   public deleteResume(resumeId:number): Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}${resumeId}`);
+    return this.http.delete<void>(`${this.apiUrl}${resumeId}`,
+    {headers:
+      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
   }
 
 }

@@ -15,6 +15,7 @@ import { LoginComponent } from './core/components/login/login.component';
 import { AuthService } from './core/services/auth.service';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { ResumeComponent } from './core/user/resume/resume.component';
+import { ResumeService } from './core/user/services/resume.service';
 
 
 
@@ -35,7 +36,7 @@ import { ResumeComponent } from './core/user/resume/resume.component';
     ReactiveFormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
-              JobListingsService, AuthService],
+              JobListingsService, AuthService,ResumeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

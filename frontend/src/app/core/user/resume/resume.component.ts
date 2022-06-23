@@ -4,6 +4,8 @@ import { FormGroup,FormControl, Validators } from '@angular/forms';
 import { Resume } from '../models/resume.model';
 import { ResumeService } from '../services/resume.service';
 
+
+
 @Component({
   selector: 'app-resume',
   templateUrl: './resume.component.html',
@@ -23,7 +25,8 @@ export class ResumeComponent implements OnInit {
       headline:new FormControl(null,[Validators.required,Validators.minLength(3)]),
       path: new FormControl(null,[Validators.required,Validators.minLength(3)])
     })
-    console.log("I am here")
+    console.log("I am here");
+    this.getResume();
   }
 
   onSubmit(){
@@ -36,7 +39,7 @@ export class ResumeComponent implements OnInit {
   }
 
   addResume(){
-          this.resumeService.addResume(this.resume).subscribe({
+        this.resumeService.addResume(this.resume).subscribe({
         next:(resume:Resume)=>{
           console.log(resume);
         },
@@ -45,4 +48,60 @@ export class ResumeComponent implements OnInit {
         }
       })
   }
+
+  public getResume():void{
+      this.resumeService.getResume().subscribe(
+        (response: Resume)=>{
+          this.resume = response;
+        },(error: HttpErrorResponse) =>{
+          alert(error.message);
+        }
+      )
+  }
+
+  public updateResume(resume:Resume):void{
+    console.log(resume);
+    this.resumeService.updateResume(resume).subscribe({
+      next:(resume:Resume)=>{
+        console.log(resume);
+      },
+      error:(err:HttpErrorResponse) =>{
+        alert(err.message);
+      }
+    })
+  }
+
+  public removeResume(resume:Resume):void{
+    this.resumeService.deleteResume(resume.id).subscribe({
+      next:(response:void)=>{
+        console.log("resume deleted")
+      },
+      error:(err:HttpErrorResponse)=>{
+        alert(err.message);
+      }
+    });
+  }
+
+  public onOpenModal(resume: Resume, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addResumeModal');
+    }
+    if (mode === 'edit') {
+      console.log(resume);
+      this.editResume = resume;
+      button.setAttribute('data-target', '#updateResumeModal');
+    }
+    if (mode === 'delete') {
+      this.deleteResume = resume;
+      button.setAttribute('data-target', '#deleteResumeModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+
 }
