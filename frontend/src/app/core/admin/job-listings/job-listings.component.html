@@ -1,30 +1,34 @@
 <div id="main-container">
-    <div class="row">
+  <a class="nav-link" *ngIf="isAdmin()" (click)="onOpenModal(null!, 'add')">Add Job Offer <span class="sr-only">(current)</span></a>
 
-      <div *ngFor="let jobListing of jobListings" class="col-lg-6 col-xl-6">
-         <div class="card m-3">
-               <div class="col-6 card-title align-self-center mb-0">
-                  <h3>{{jobListing?.title}}</h3>
-                 <h5>{{jobListing?.company}}</h5>
-               </div>
-        </div>
+      <div class="row">
+        <div class="col-sm-3" *ngFor="let jobListing of jobListings">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{jobListing?.title}}</h5>
+              <h5 class="card-subtitle mb-2 text-muted">{{jobListing?.company}}</h5>
+              <p class="card-text">Description: {{jobListing?.description}}.</p>
+            </div>
             <ul class="list-group list-group-flush">
-              <li> <p class="m-0">{{jobListing?.description}}</p></li>
-               <li class="list-group-item"><i class="fa-solid fa-tally-1"></i> Number of Vacancies: {{jobListing?.nVacancies}}</li>
-               <li class="list-group-item"><i class="fa-solid fa-alarm-clock"></i> StartDate : {{jobListing?.startDate}}</li>
+              <li class="list-group-item">Number of Vacancies : {{jobListing?.nVacancies}}</li>
+              <li class="list-group-item"> Expected Start Date: {{jobListing?.startDate}}</li>
             </ul>
             <div class="card-body">
-               <div class="float-right btn-group btn-group-sm">
-                  <a (click)="onOpenModal(jobListing, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                  <a (click)="onOpenModal(jobListing, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-               </div>
+              <a (click)="onOpenModal(jobListing, 'edit')" class="btn btn-primary tooltips m-2" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+              <a (click)="onOpenModal(jobListing, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
             </div>
-         </div>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+
+        </div>
       </div>
 
 
     <!-- Add Employee Modal -->
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addJobListingModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
            <div class="modal-header">
@@ -60,7 +64,7 @@
                  <input type="text" ngModel name="nVacancies" class="form-control" id="imageUrl" placeholder="Number of Vacancies" required>
               </div>
               <div class="modal-footer">
-                 <button type="button" id="add-jobListings-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" id="add-offer-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
                  <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
               </div>
               </form>

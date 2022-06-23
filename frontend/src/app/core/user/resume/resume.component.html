@@ -1,3 +1,47 @@
+<main class="form-signin w-100 mt-5 m-auto text-center">
+  <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
+    <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+    <h1 class="mb-3 display-5">Add your resume</h1>
+
+    <!-- headline -->
+    <div class="form-floating mb-1">
+      <label for="headline">Headline</label>
+      <input type="text" class="form-control" id="headline"
+        formControlName="headline">
+      <div class="alert alert-danger" *ngIf="resumeForm.get('headline')?.invalid
+        && resumeForm.get('headline')?.touched">
+        <div *ngIf="resumeForm.get('headline')?.errors?.['required']">
+          Headline is required
+        </div>
+        <div *ngIf="resumeForm.get('headline')?.errors?.['minlength']">
+          Headline must be at least 3 characters long
+        </div>
+      </div>
+    </div>
+    <!-- path -->
+    <div class="form-floating mb-1">
+      <label for="path">Link to your resume</label>
+      <input type="text" class="form-control" id="path"
+        formControlName="path">
+      <div class="alert alert-danger" *ngIf="resumeForm.get('path')?.invalid
+        && resumeForm.get('path')?.touched">
+        <div *ngIf="resumeForm.get('path')?.errors?.['required']">
+          Link to your resume is required
+        </div>
+        <div *ngIf="resumeForm.get('path')?.errors?.['minlength']">
+          Link to your resume must be at least 3 characters long
+        </div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="resumeForm.invalid" class="w-100 btn btn-lg btn-success">Save</button>
+
+  </form>
+
+  <p class="mt-5 mb-3 text-muted">S/Z &copy; 2022</p>
+</main>
+
+
+<!--
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">@</span>
   <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
@@ -29,4 +73,4 @@
 <div class="input-group">
   <span class="input-group-text">With textarea</span>
   <textarea class="form-control" aria-label="With textarea"></textarea>
-</div>
+</div> -->

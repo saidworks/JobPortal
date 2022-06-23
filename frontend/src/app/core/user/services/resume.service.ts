@@ -18,8 +18,8 @@ export class ResumeService {
     )
   }
 
-  public getResume(resumeId:number): Observable<Resume> {
-    return this.http.get<Resume>(`${this.apiUrl}${resumeId}`);
+  public getResume(): Observable<Resume> {
+    return this.http.get<Resume>(`${this.apiUrl}$mycv`);
   }
 
   public addResume(resume:Resume):Observable<Resume>{

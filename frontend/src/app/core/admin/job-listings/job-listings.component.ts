@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { JobListing } from '../models/job-listing.model';
 import { JobListingsService } from '../services/job-listings.service';
 
@@ -14,12 +15,13 @@ export class JobListingsComponent implements OnInit {
   public jobListings!: JobListing[];
   public editJobListing!: JobListing ;
   public deleteJobListing!: JobListing;
+  public isLoggedIn!: boolean;
 
-  constructor(private jobListingsService:JobListingsService ) { }
+  constructor(private jobListingsService:JobListingsService, private authService:AuthService ) { }
 
   ngOnInit(){
     this.getJobListings();
-
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   public getJobListings():void{
@@ -32,7 +34,7 @@ export class JobListingsComponent implements OnInit {
     )
   }
   public onAddJobListings(addForm: NgForm): void {
-    document.getElementById('add-employee-form')!.click();
+    document.getElementById('add-offer-form')!.click();
     this.jobListingsService.addJobListings(addForm.value).subscribe(
       (response: JobListing) => {
         console.log(response);
@@ -88,7 +90,17 @@ export class JobListingsComponent implements OnInit {
     }
   }
 
-
+  isAdmin(){
+    let roles:string[] = JSON.parse(sessionStorage.getItem("roles")!);
+    if(roles?.length != null && this.isLoggedIn){
+      for(let role of roles){
+        if(role=="ROLE_ADMIN"){
+          return true;
+        }
+      }
+   }
+   return false;
+  }
 
 
   public onOpenModal(jL: JobListing, mode: string): void {
@@ -98,7 +110,7 @@ export class JobListingsComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
-      button.setAttribute('data-target', '#addEmployeeModal');
+      button.setAttribute('data-target', '#addJobListingModal');
     }
     if (mode === 'edit') {
       this.editJobListing = jL;
