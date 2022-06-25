@@ -8,16 +8,9 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/api/addresss", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AddressResource {
@@ -33,9 +26,9 @@ public class AddressResource {
         return ResponseEntity.ok(addressService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AddressDTO> getAddress(@PathVariable final Long id) {
-        return ResponseEntity.ok(addressService.get(id));
+    @GetMapping("/myaddress")
+    public ResponseEntity<AddressDTO> getAddress() {
+        return ResponseEntity.ok(addressService.get());
     }
 
     @PostMapping

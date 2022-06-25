@@ -33,6 +33,6 @@ public class Address {
     private String state;
     @JsonBackReference
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
-    private User address;
+    private User user;
 
 }

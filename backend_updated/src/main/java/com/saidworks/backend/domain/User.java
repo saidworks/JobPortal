@@ -44,11 +44,11 @@ public class User {
     @Column
     private String campus;
     @JsonManagedReference
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
     @JsonManagedReference
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "resume_id")
     private Resume resume;
     @JsonManagedReference
@@ -60,7 +60,7 @@ public class User {
     )
     private Set<Role> roles;
     @JsonManagedReference
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
     private Set<JobApplication> candidateJobApplications;
 
 }

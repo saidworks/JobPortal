@@ -22,15 +22,12 @@ import org.springframework.web.server.ResponseStatusException;
 public class ResumeService {
 
     private final ResumeRepository resumeRepository;
-    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     private final UserRepository userRepository;
 
     public ResumeService(final ResumeRepository resumeRepository,
-            UserRepository userRepository,
-                         UserDetailsServiceImpl userDetailsServiceImpl) {
+            UserRepository userRepository) {
         this.resumeRepository = resumeRepository;
-        this.userDetailsServiceImpl = userDetailsServiceImpl;
         this.userRepository = userRepository;
     }
 
