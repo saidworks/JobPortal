@@ -1,8 +1,8 @@
-<div id="main-container">
+<div id="main-container" class="form-signin w-100 mt-5 m-auto">
   <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add your Resume <span class="sr-only">(current)</span></a>
 
       <div class="row">
-          <div class="card">
+          <div class="card col-sm-3">
             <div class="card-body">
               <h5 class="card-title">{{resume?.headline}}</h5>
 
@@ -126,9 +126,8 @@
                 <h1 class="mb-3 display-5">delete your resume</h1>
                 <p> are you sure you want to delete your resume</p>
                 <div class="modal-footer">
-                  <button type="button" id="modify-resume-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button data-dismiss="modal" type="submit" class="w-100 btn btn-lg btn-success"
-                  (click)="removeResume(resume)">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button (click)="removeResume(resume)" class="btn btn-danger" data-dismiss="modal">Yes</button>
                 </div>
 
             </div>

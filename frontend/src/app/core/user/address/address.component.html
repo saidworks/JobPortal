@@ -1,0 +1,163 @@
+<div id="main-container" class="form-signin w-100 mt-5 m-auto">
+  <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add your Address <span class="sr-only">(current)</span></a>
+
+      <div class="row">
+          <div class="card col-sm-3">
+            <div class="card-body">
+              <h5 class="card-title">{{address?.street}}</h5>
+
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">City: {{address?.city}}</li>
+              <li class="list-group-item">State: {{address?.state}}</li>
+            </ul>
+            <div class="card-body">
+              <a (click)="onOpenModal(address, 'edit')" class="btn btn-primary tooltips m-2" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+              <a (click)="onOpenModal(address, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+
+          </div>
+      </div>
+      <!-- Add Address Modal -->
+      <div class="modal fade" id="addAddressModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addEmployeeModalLabel">Add Job Listings</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <h1 class="mb-3 display-5">Add your Address</h1>
+
+                <!-- street -->
+                <div class="form-floating mb-1">
+                  <label for="street">Headline</label>
+                  <input type="text" class="form-control" id="street"
+                    formControlName="street" >
+                  <div class="alert alert-danger" *ngIf="addressForm.get('street')?.invalid
+                    && addressForm.get('street')?.touched">
+                    <div *ngIf="addressForm.get('street')?.errors?.['required']">
+                      Street is required
+                    </div>
+                    <div *ngIf="addressForm.get('street')?.errors?.['minlength']">
+                      Street must be at least 3 characters long
+                    </div>
+                  </div>
+                </div>
+                <!-- city -->
+                <div class="form-floating mb-1">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" id="city"
+                    formControlName="city">
+                  <div class="alert alert-danger" *ngIf="addressForm.get('city')?.invalid
+                    && addressForm.get('city')?.touched">
+                    <div *ngIf="addressForm.get('city')?.errors?.['required']">
+                      city is required
+                    </div>
+                    <div *ngIf="addressForm.get('city')?.errors?.['minlength']">
+                      city must be at least 3 characters long
+                    </div>
+                  </div>
+                </div>
+                <!-- state -->
+                <div class="form-floating mb-1">
+                  <label for="state">State</label>
+                  <input type="text" class="form-control" id="state"
+                    formControlName="state">
+                  <div class="alert alert-danger" *ngIf="addressForm.get('state')?.invalid
+                    && addressForm.get('state')?.touched">
+                    <div *ngIf="addressForm.get('state')?.errors?.['required']">
+                      State is required
+                    </div>
+                    <div *ngIf="addressForm.get('state')?.errors?.['minlength']">
+                      State must be at least 3 characters long
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" [disabled]="addressForm.invalid" class="w-100 btn btn-lg btn-success">Save</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       <!-- Update Address Modal -->
+       <div class="modal fade" id="updateAddressModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addEmployeeModalLabel">Add Job Listings</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #editForm="ngForm">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <h1 class="mb-3 display-5">Modify your Address</h1>
+                  <!-- id -->
+                  <div class="form-floating mb-1">
+                    <label for="headline">id</label>
+                    <input type="number" class="form-control" name="id" id="id" ngModel="{{editAddress?.id}}" disabled>
+                  </div>
+                <!-- street -->
+                <div class="form-floating mb-1">
+                  <label for="street">Street</label>
+                  <input type="text" class="form-control" name="street" id="street" ngModel="{{editAddress?.street}}">
+                </div>
+                <!-- city -->
+                <div class="form-floating mb-1">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" name="city" id="city" ngModel="{{editAddress?.city}}">
+                </div>
+                <!-- state -->
+                <div class="form-floating mb-1">
+                  <label for="state">City</label>
+                  <input type="text" class="form-control" name="state" id="state" ngModel="{{editAddress?.state}}">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="modify-Address-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button data-dismiss="modal" type="submit" class="w-100 btn btn-lg btn-success"
+                  (click)="updateAddress(editForm.value)">Save changes</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- delete Modal -->
+      <div class="modal fade" id="deleteAddressModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <h1 class="mb-3 display-5">delete your Address</h1>
+                <p> are you sure you want to delete your Address</p>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button (click)="removeAddress(address)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  <p class="mt-5 mb-3 text-muted">S/Z &copy; 2022</p>
+</div>
+

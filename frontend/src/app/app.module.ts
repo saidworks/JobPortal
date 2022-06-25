@@ -16,6 +16,7 @@ import { AuthService } from './core/services/auth.service';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { ResumeComponent } from './core/user/resume/resume.component';
 import { ResumeService } from './core/user/services/resume.service';
+import { AddressComponent } from './core/user/address/address.component';
 
 
 
@@ -27,7 +28,8 @@ import { ResumeService } from './core/user/services/resume.service';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    ResumeComponent
+    ResumeComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,
