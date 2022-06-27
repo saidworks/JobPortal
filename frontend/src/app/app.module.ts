@@ -17,6 +17,11 @@ import { AuthInterceptorService } from './core/services/auth-interceptor.service
 import { ResumeComponent } from './core/user/resume/resume.component';
 import { ResumeService } from './core/user/services/resume.service';
 import { AddressComponent } from './core/user/address/address.component';
+import { DashboardComponent } from './core/user/dashboard/dashboard.component';
+import { JobApplicationComponent } from './core/user/job-application/job-application.component';
+import { JobListingDetailComponent } from './core/user/job-listings/job-listing-detail/job-listing-detail.component';
+import { AddressService } from './core/user/services/address.service';
+import { JobsComponent } from './core/user/job-listings/jobs.component';
 
 
 
@@ -29,7 +34,11 @@ import { AddressComponent } from './core/user/address/address.component';
     RegisterComponent,
     LoginComponent,
     ResumeComponent,
-    AddressComponent
+    AddressComponent,
+    DashboardComponent,
+    JobApplicationComponent,
+    JobListingDetailComponent,
+    JobsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +47,7 @@ import { AddressComponent } from './core/user/address/address.component';
     ReactiveFormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
-              JobListingsService, AuthService,ResumeService],
+              JobListingsService, AuthService,ResumeService,AddressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

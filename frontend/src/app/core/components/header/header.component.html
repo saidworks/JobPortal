@@ -18,7 +18,7 @@
         </li>
       </ul>
         <form class="d-flex" *ngIf="loggedIn()">
-            <input type="search" (ngModelChange)="searchEmployees(key.value)" #key="ngModel" ngModel
+            <input type="search" (ngModelChange)="searchJobListings(key.value)" #key="ngModel" ngModel
             name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search Job Offer..." required>
         </form>
         <ul class="navbar-nav d-flex">

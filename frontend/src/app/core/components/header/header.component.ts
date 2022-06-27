@@ -47,19 +47,20 @@ export class HeaderComponent implements OnInit {
   }
 
   public getJobListings():void{
-    this.jobListingsService.getJobListings().subscribe(
+    if(this.isLoggedIn){this.jobListingsService.getJobListings().subscribe(
       (response: JobListing[])=>{
         this.jobListings = response;
         console.log(this.jobListings);
       },(error: HttpErrorResponse) =>{
         alert(error.message);
       }
-    )
+    )}
+
   }
 
 
 
-  public searchEmployees(key: string): void {
+  public searchJobListings(key: string): void {
     console.log(key);
     const results: JobListing[] = [];
     for (const j of this.jobListings) {

@@ -1,0 +1,22 @@
+<div id="main-container">
+
+      <div class="row m-3">
+        <div class="col-sm-3" *ngFor="let jobListing of jobListings">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{jobListing?.title}}</h5>
+              <h5 class="card-subtitle mb-2 text-muted">{{jobListing?.company}}</h5>
+              <p class="card-text">Description: {{jobListing?.description}}.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Number of Vacancies : {{jobListing?.nVacancies}}</li>
+              <li class="list-group-item"> Expected Start Date: {{jobListing?.startDate}}</li>
+            </ul>
+            <div class="card-body text-center">
+              <a [routerLink]="[jobListing.id]" class="btn btn-primary">Apply</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+</div>

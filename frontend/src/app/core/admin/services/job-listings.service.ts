@@ -33,5 +33,18 @@ export class JobListingsService {
     return this.http.delete<void>(`${this.apiUrl}${jobListingId}`);
   }
 
+  public getAJobListing(jobListingId:number){
+    return this.http.get<JobListing>(`${this.apiUrl}${jobListingId}`,
+     {headers:
+      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+    });
+  }
+
 
 }
+/*  public getAddress(): Observable<Address> {
+    return this.http.get<Address>(`${this.apiUrl}myaddress`,
+    {headers:
+      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  }
+*/
