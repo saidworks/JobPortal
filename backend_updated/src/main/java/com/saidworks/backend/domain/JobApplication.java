@@ -28,17 +28,9 @@ public class JobApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String user;
-
-    @Column
-    private String jobListing;
-
     @Column
     private LocalDate applicationDate;
 
-    @Column
-    private String resumeId;
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_listings_id")

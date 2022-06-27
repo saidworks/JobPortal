@@ -38,12 +38,12 @@ public class JobApplicationResource {
         return ResponseEntity.ok(jobApplicationService.get(id));
     }
 
-    @PostMapping
-    @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createJobApplication(
-            @RequestBody @Valid final JobApplicationDTO jobApplicationDTO) {
-        return new ResponseEntity<>(jobApplicationService.create(jobApplicationDTO), HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    @ApiResponse(responseCode = "201")
+//    public ResponseEntity<Long> createJobApplication(
+//            @RequestBody @Valid final JobApplicationDTO jobApplicationDTO) {
+//        return new ResponseEntity<>(jobApplicationService.create(jobApplicationDTO), HttpStatus.CREATED);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateJobApplication(@PathVariable final Long id,

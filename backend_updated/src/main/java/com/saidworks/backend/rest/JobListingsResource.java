@@ -28,26 +28,26 @@ public class JobListingsResource {
     public ResponseEntity<List<JobListingsDTO>> getAllJobListingss() {
         return ResponseEntity.ok(jobListingsService.findAll());
     }
-
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<JobListingsDTO> getJobListings(@PathVariable final Long id) {
         return ResponseEntity.ok(jobListingsService.get(id));
     }
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     @ApiResponse(responseCode = "201")
     public ResponseEntity<Long> createJobListings(
             @RequestBody @Valid final JobListingsDTO jobListingsDTO) {
         return new ResponseEntity<>(jobListingsService.create(jobListingsDTO), HttpStatus.CREATED);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateJobListings(@PathVariable final Long id,
             @RequestBody @Valid final JobListingsDTO jobListingsDTO) {
         jobListingsService.update(id, jobListingsDTO);
         return ResponseEntity.ok().build();
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     @ApiResponse(responseCode = "204")
     public ResponseEntity<Void> deleteJobListings(@PathVariable final Long id) {

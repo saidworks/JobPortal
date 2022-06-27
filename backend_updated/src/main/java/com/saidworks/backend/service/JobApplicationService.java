@@ -3,6 +3,7 @@ package com.saidworks.backend.service;
 import com.saidworks.backend.domain.JobApplication;
 import com.saidworks.backend.domain.JobListings;
 import com.saidworks.backend.domain.User;
+import com.saidworks.backend.model.CustomUserBean;
 import com.saidworks.backend.model.JobApplicationDTO;
 import com.saidworks.backend.repos.JobApplicationRepository;
 import com.saidworks.backend.repos.JobListingsRepository;
@@ -10,6 +11,8 @@ import com.saidworks.backend.repos.UserRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -42,9 +45,16 @@ public class JobApplicationService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public Long create(final JobApplicationDTO jobApplicationDTO) {
+    public Long create(final JobApplicationDTO jobApplicationDTO,final Long jobListingsId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserBean userDetails = (CustomUserBean) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findByUsername(username).get();
+        JobListings job = jobListingsRepository.findById(jobListingsId).get();
         final JobApplication jobApplication = new JobApplication();
         mapToEntity(jobApplicationDTO, jobApplication);
+        jobApplication.setCandidate(user);
+        jobApplication.setJobListings(job);
         return jobApplicationRepository.save(jobApplication).getId();
     }
 
@@ -62,10 +72,7 @@ public class JobApplicationService {
     private JobApplicationDTO mapToDTO(final JobApplication jobApplication,
                                        final JobApplicationDTO jobApplicationDTO) {
         jobApplicationDTO.setId(jobApplication.getId());
-        jobApplicationDTO.setUser(jobApplication.getUser());
-        jobApplicationDTO.setJobListing(jobApplication.getJobListing());
         jobApplicationDTO.setApplicationDate(jobApplication.getApplicationDate());
-        jobApplicationDTO.setResumeId(jobApplication.getResumeId());
         jobApplicationDTO.setJobListings(jobApplication.getJobListings() == null ? null : jobApplication.getJobListings().getId());
         jobApplicationDTO.setCandidate(jobApplication.getCandidate() == null ? null : jobApplication.getCandidate().getId());
         return jobApplicationDTO;
@@ -73,10 +80,7 @@ public class JobApplicationService {
 
     private JobApplication mapToEntity(final JobApplicationDTO jobApplicationDTO,
                                        final JobApplication jobApplication) {
-        jobApplication.setUser(jobApplicationDTO.getUser());
-        jobApplication.setJobListing(jobApplicationDTO.getJobListing());
         jobApplication.setApplicationDate(jobApplicationDTO.getApplicationDate());
-        jobApplication.setResumeId(jobApplicationDTO.getResumeId());
         if (jobApplicationDTO.getJobListings() != null && (jobApplication.getJobListings() == null || !jobApplication.getJobListings().getId().equals(jobApplicationDTO.getJobListings()))) {
             final JobListings jobListings = jobListingsRepository.findById(jobApplicationDTO.getJobListings())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "jobListings not found"));

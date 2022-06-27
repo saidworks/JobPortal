@@ -13,17 +13,9 @@ public class JobApplicationDTO {
 
     private Long id;
 
-    @NotNull
-    @Size(max = 255)
-    private String user;
-
-    @Size(max = 255)
-    private String jobListing;
 
     private LocalDate applicationDate;
 
-    @Size(max = 255)
-    private String resumeId;
 
     private Long jobListings;
 
