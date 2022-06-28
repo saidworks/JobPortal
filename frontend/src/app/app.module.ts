@@ -22,7 +22,7 @@ import { JobApplicationComponent } from './core/user/job-application/job-applica
 import { JobListingDetailComponent } from './core/user/job-listings/job-listing-detail/job-listing-detail.component';
 import { AddressService } from './core/user/services/address.service';
 import { JobsComponent } from './core/user/job-listings/jobs.component';
-
+import { ADashboardComponent } from './core/admin/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import { JobsComponent } from './core/user/job-listings/jobs.component';
     DashboardComponent,
     JobApplicationComponent,
     JobListingDetailComponent,
-    JobsComponent
+    JobsComponent,
+    ADashboardComponent
   ],
   imports: [
     BrowserModule,

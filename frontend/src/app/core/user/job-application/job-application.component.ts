@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JobApplicationComponent implements OnInit {
   jobApplicationForm!: FormGroup;
   jobListingsId!:number;
+
   jobApplication = new JobApplication(1,new Date());
   constructor(private jobApplicationService:JobApplicationService, private activatedRoute:ActivatedRoute) { }
 

@@ -42,13 +42,16 @@ export class LoginComponent implements OnInit {
 
   profileSwitch(){
     let roles:string[] = JSON.parse(sessionStorage.getItem("roles")!);
+    console.log(roles)
     if(roles.length>0 && this.isLoggedIn){
       for(let role of roles){
         if(role=="ROLE_ADMIN"){
           console.log("Admin");
           this.router.navigate(['/home']);
         }
-
+        else{
+          this.router.navigate(['/user']);
+        }
       }
    }
   }

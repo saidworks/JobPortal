@@ -17,6 +17,8 @@ export class AddressComponent implements OnInit {
   public editAddress!: Address;
   public deleteAddress!: Address;
   errorMessage = '';
+  hasAddress:boolean = false;
+
   constructor(private addressService:AddressService) { }
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class AddressComponent implements OnInit {
         this.addressService.addAddress(this.address).subscribe({
         next:(address:Address)=>{
           console.log(address);
+          this.hasAddress = true;
         },
         error:(err:HttpErrorResponse)=>{
           this.errorMessage = err.message;
@@ -51,13 +54,19 @@ export class AddressComponent implements OnInit {
   }
 
   public getAddress():void{
-      this.addressService.getAddress().subscribe(
-        (response: Address)=>{
-          this.address = response;
-        },(error: HttpErrorResponse) =>{
-          alert(error.message);
-        }
-      )
+      if(this.hasAddress){
+        this.addressService.getAddress().subscribe(
+          (response: Address)=>{
+            this.address = response;
+            if(this.address){
+              this.hasAddress = true;
+            }
+          },(error: HttpErrorResponse) =>{
+            console.log(error.message);
+          }
+        )
+      }
+
   }
 
   public updateAddress(address:Address):void{
@@ -67,7 +76,7 @@ export class AddressComponent implements OnInit {
         console.log(address);
       },
       error:(err:HttpErrorResponse) =>{
-        alert(err.message);
+       console.log(err.message);
       }
     })
   }
@@ -78,7 +87,7 @@ export class AddressComponent implements OnInit {
         console.log("address deleted")
       },
       error:(err:HttpErrorResponse)=>{
-        alert(err.message);
+       console.log(err.message);
       }
     });
   }

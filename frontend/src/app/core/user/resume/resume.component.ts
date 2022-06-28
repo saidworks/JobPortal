@@ -18,6 +18,8 @@ export class ResumeComponent implements OnInit {
   public editResume!: Resume;
   public deleteResume!: Resume;
   errorMessage = '';
+  hasResume:boolean = false;
+
   constructor(private resumeService:ResumeService) { }
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class ResumeComponent implements OnInit {
         this.resumeService.addResume(this.resume).subscribe({
         next:(resume:Resume)=>{
           console.log(resume);
+          this.hasResume = true;
         },
         error:(err:HttpErrorResponse)=>{
           this.errorMessage = err.message;
@@ -50,13 +53,19 @@ export class ResumeComponent implements OnInit {
   }
 
   public getResume():void{
+    if(this.hasResume){
       this.resumeService.getResume().subscribe(
         (response: Resume)=>{
           this.resume = response;
+          if(this.resume){
+            this.hasResume = true;
+          }
         },(error: HttpErrorResponse) =>{
           alert(error.message);
         }
       )
+    }
+
   }
 
   public updateResume(resume:Resume):void{

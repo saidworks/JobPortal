@@ -11,16 +11,13 @@
 
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" *ngIf="loggedIn()" routerLink="/home">User Content</a>
+          <a class="nav-link" *ngIf="loggedIn() && !isAdmin()" routerLink="/user">User Dashboard</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" *ngIf="loggedIn()" routerLink="/home">Admin Content</a>
+          <a class="nav-link" *ngIf="loggedIn() && isAdmin()" routerLink="/home">Admin Dashboard</a>
         </li>
       </ul>
-        <form class="d-flex" *ngIf="loggedIn()">
-            <input type="search" (ngModelChange)="searchJobListings(key.value)" #key="ngModel" ngModel
-            name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search Job Offer..." required>
-        </form>
+
         <ul class="navbar-nav d-flex">
           <li class="nav-item">
             <a href="/signup" class="nav-link" routerLink="signup" *ngIf="!loggedIn()">Sign Up</a>

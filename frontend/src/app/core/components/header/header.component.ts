@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   constructor(private jobListingsService:JobListingsService,private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.getJobListings();
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
@@ -28,7 +27,7 @@ export class HeaderComponent implements OnInit {
     let roles:string[] = JSON.parse(sessionStorage.getItem("roles")!);
     if(roles?.length != null && this.isLoggedIn){
       for(let role of roles){
-        if(role=="ROLE_ADMIN"){
+        if(role==="ROLE_ADMIN"){
           return true;
         }
       }
@@ -46,36 +45,6 @@ export class HeaderComponent implements OnInit {
     return this.authService.isLoggedIn()
   }
 
-  public getJobListings():void{
-    if(this.isLoggedIn){this.jobListingsService.getJobListings().subscribe(
-      (response: JobListing[])=>{
-        this.jobListings = response;
-        console.log(this.jobListings);
-      },(error: HttpErrorResponse) =>{
-        alert(error.message);
-      }
-    )}
-
-  }
-
-
-
-  public searchJobListings(key: string): void {
-    console.log(key);
-    const results: JobListing[] = [];
-    for (const j of this.jobListings) {
-      if (j.title.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || j.description.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || j.location.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || j.company.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(j);
-      }
-    }
-    this.jobListings = results;
-    if (results.length === 0 || !key) {
-      this.getJobListings();
-    }
-  }
 
 
 

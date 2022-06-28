@@ -73,7 +73,7 @@ export class JobListingsComponent implements OnInit {
     );
   }
 
-  public searchEmployees(key: string): void {
+  public searchJobListings(key: string): void {
     console.log(key);
     const results: JobListing[] = [];
     for (const j of this.jobListings) {

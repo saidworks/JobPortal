@@ -1,6 +1,10 @@
 <div id="main-container">
   <a class="nav-link" *ngIf="isAdmin()" (click)="onOpenModal(null!, 'add')">Add Job Offer <span class="sr-only">(current)</span></a>
 
+  <form class="d-flex">
+    <input type="search" (ngModelChange)="searchJobListings(key.value)" #key="ngModel" ngModel
+    name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search Job Offer..." required>
+  </form>
       <div class="row">
         <div class="col-sm-3" *ngFor="let jobListing of jobListings">
           <div class="card">

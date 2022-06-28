@@ -1,17 +1,17 @@
-<main class="form-signin w-100 mt-5 m-auto text-center">
+<main class="form-signin w-50 mt-5 m-auto text-center">
   <form [formGroup]="jobApplicationForm" (ngSubmit)="onSubmit()">
     <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
     <h1 class="mb-3 display-5">In order to apply please confirm today's date</h1>
 
     <!-- date -->
-    <div class="form-floating">
-      <label for="applicationDate">Date Of application</label>
-      <input type="date" class="form-control mt-5" id="applicationDate"
+    <div class="form-floating  mb-4 w-80">
+      <label for="applicationDate" class="label">Date Of Application</label>
+      <input type="date" class="form-control text-center" id="applicationDate"
         formControlName="applicationDate" >
     </div>
 
 
-    <button type="submit" [disabled]="jobApplicationForm.invalid" class="w-100 btn btn-lg btn-success">Save</button>
+    <button type="submit" [disabled]="jobApplicationForm.invalid" class="w-50 btn btn-lg btn-success">Save</button>
 
   </form>
 

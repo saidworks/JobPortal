@@ -1,7 +1,7 @@
 <div id="main-container" class="form-signin w-100 mt-5 m-auto">
-  <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add your Resume <span class="sr-only">(current)</span></a>
+  <button class="nav-link btn btn-success text-white" (click)="onOpenModal(null!, 'add')">Add your Resume <span class="sr-only">(current)</span></button>
 
-      <div class="row">
+      <div *ngIf="hasResume"  class="row">
           <div class="card col-sm-3">
             <div class="card-body">
               <h5 class="card-title">{{resume?.headline}}</h5>
@@ -18,7 +18,7 @@
           </div>
       </div>
       <!-- Add Resume Modal -->
-      <div class="modal fade" id="addResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+      <div *ngIf="!hasResume" class="modal fade" id="addResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -27,9 +27,9 @@
               <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
               <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
-                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="72" height="57">
+                <img class="mb-4" src="./assets/logo_perscholas.png" alt="" width="172" height="157">
                 <h1 class="mb-3 display-5">Add your resume</h1>
 
                 <!-- headline -->
@@ -72,7 +72,7 @@
 
 
        <!-- Update Resume Modal -->
-       <div class="modal fade" id="updateResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+       <div *ngIf="hasResume" class="modal fade" id="updateResumeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -135,8 +135,5 @@
         </div>
       </div>
 
-
-
-  <p class="mt-5 mb-3 text-muted">S/Z &copy; 2022</p>
 </div>
 
