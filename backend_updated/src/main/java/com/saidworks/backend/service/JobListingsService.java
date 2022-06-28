@@ -43,6 +43,7 @@ public class JobListingsService {
         final JobListings jobListings = new JobListings();
 
         mapToEntity(jobListingsDTO, jobListings);
+        System.out.println(jobListings);
         return jobListingsRepository.save(jobListings).getId();
     }
 
