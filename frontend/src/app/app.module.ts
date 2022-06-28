@@ -23,6 +23,9 @@ import { JobListingDetailComponent } from './core/user/job-listings/job-listing-
 import { AddressService } from './core/user/services/address.service';
 import { JobsComponent } from './core/user/job-listings/jobs.component';
 import { ADashboardComponent } from './core/admin/dashboard/dashboard.component';
+import { LogoutComponent } from './core/components/logout/logout.component';
+import { UsersComponent } from './core/admin/users/users.component';
+import { JobApplicationsComponent } from './core/admin/job-applications/job-applications.component';
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { ADashboardComponent } from './core/admin/dashboard/dashboard.component'
     JobApplicationComponent,
     JobListingDetailComponent,
     JobsComponent,
-    ADashboardComponent
+    ADashboardComponent,
+    LogoutComponent,
+    UsersComponent,
+    JobApplicationsComponent
   ],
   imports: [
     BrowserModule,

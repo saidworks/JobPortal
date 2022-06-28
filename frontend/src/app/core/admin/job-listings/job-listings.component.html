@@ -1,10 +1,10 @@
 <div id="main-container">
-  <a class="nav-link" *ngIf="isAdmin()" (click)="onOpenModal(null!, 'add')">Add Job Offer <span class="sr-only">(current)</span></a>
+  <a class="mt-2 mb-2 nav-link w-25 btn btn-primary text-white" *ngIf="isAdmin()" (click)="onOpenModal(null!, 'add')">Add Job Offer <span class="sr-only">(current)</span></a>
 
-  <form class="d-flex">
+  <!-- <form class="d-flex">
     <input type="search" (ngModelChange)="searchJobListings(key.value)" #key="ngModel" ngModel
     name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search Job Offer..." required>
-  </form>
+  </form> -->
       <div class="row">
         <div class="col-sm-3" *ngFor="let jobListing of jobListings">
           <div class="card">
@@ -22,8 +22,7 @@
               <a (click)="onOpenModal(jobListing, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
             </div>
             <div class="card-body">
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <a [routerLink]="[jobListing.id]" class="btn btn-primary">View Applications</a>
             </div>
           </div>
 

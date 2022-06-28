@@ -1,7 +1,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" style="color:white;">Per Scholas Jobs</a>
+      <a class="navbar-brand" style="color:white;" routerLink="user">Per Scholas Jobs</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -14,7 +14,7 @@
           <a class="nav-link" *ngIf="loggedIn() && !isAdmin()" routerLink="/user">User Dashboard</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" *ngIf="loggedIn() && isAdmin()" routerLink="/home">Admin Dashboard</a>
+          <a class="nav-link" *ngIf="loggedIn() && isAdmin()" routerLink="/admin">Admin Dashboard</a>
         </li>
       </ul>
 
