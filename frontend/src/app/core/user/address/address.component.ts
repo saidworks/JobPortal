@@ -27,16 +27,16 @@ export class AddressComponent implements OnInit {
       state:new FormControl(null,[Validators.required,Validators.minLength(3)]),
       city: new FormControl(null,[Validators.required,Validators.minLength(3)])
     })
-    console.log("I am here");
+    // console.log("I am here");
     this.getAddress();
   }
 
   onSubmit(){
-    console.log("I am here in submit")
+    // console.log("I am here in submit")
       this.address.street = this.addressForm.value.street;
       this.address.city = this.addressForm.value.city;
       this.address.city = this.addressForm.value.state;
-      console.log(this.addressForm);
+      // console.log(this.addressForm);
       this.addAddress();
 
   }
@@ -46,6 +46,7 @@ export class AddressComponent implements OnInit {
         next:(address:Address)=>{
           console.log(address);
           this.hasAddress = true;
+          window.location.reload();
         },
         error:(err:HttpErrorResponse)=>{
           this.errorMessage = err.message;

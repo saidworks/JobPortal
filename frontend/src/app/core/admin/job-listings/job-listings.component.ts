@@ -29,7 +29,7 @@ export class JobListingsComponent implements OnInit {
       (response: JobListing[])=>{
         this.jobListings = response;
       },(error: HttpErrorResponse) =>{
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -42,7 +42,7 @@ export class JobListingsComponent implements OnInit {
         addForm.reset();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
         addForm.reset();
       }
     );

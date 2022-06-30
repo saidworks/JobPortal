@@ -24,7 +24,7 @@ export class JobsComponent implements OnInit {
       (response: JobListing[])=>{
         this.jobListings = response;
       },(error: HttpErrorResponse) =>{
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }

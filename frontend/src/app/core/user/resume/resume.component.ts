@@ -76,7 +76,7 @@ export class ResumeComponent implements OnInit {
         window.location.reload();
       },
       error:(err:HttpErrorResponse) =>{
-        alert(err.message);
+        console.log(err.message);
       }
     })
   }
@@ -87,7 +87,7 @@ export class ResumeComponent implements OnInit {
         console.log("resume deleted")
       },
       error:(err:HttpErrorResponse)=>{
-        alert(err.message);
+        console.log(err.message);
       }
     });
   }
