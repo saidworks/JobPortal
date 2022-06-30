@@ -52,7 +52,7 @@ public class User {
     @JoinColumn(name = "resume_id")
     private Resume resume;
     @JsonManagedReference
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
     @JoinTable(
             schema = "jobportalonprogress",name = "user_role",
             joinColumns ={ @JoinColumn(name = "user_id")},
