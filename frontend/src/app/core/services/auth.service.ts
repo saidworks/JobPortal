@@ -43,7 +43,7 @@ export class AuthService {
    logout(){
      sessionStorage.clear();
      console.log("log out")
-     this.router.navigate(['']);
+     this.router.navigate(['/logout']);
    }
 
    isLoggedIn():boolean {

@@ -45,6 +45,7 @@ export class ResumeComponent implements OnInit {
         next:(resume:Resume)=>{
           console.log(resume);
           this.hasResume = true;
+          window.location.reload();
         },
         error:(err:HttpErrorResponse)=>{
           this.errorMessage = err.message;
@@ -53,7 +54,7 @@ export class ResumeComponent implements OnInit {
   }
 
   public getResume():void{
-    if(this.hasResume){
+
       this.resumeService.getResume().subscribe(
         (response: Resume)=>{
           this.resume = response;
@@ -61,10 +62,9 @@ export class ResumeComponent implements OnInit {
             this.hasResume = true;
           }
         },(error: HttpErrorResponse) =>{
-          alert(error.message);
+          console.log(error.message);
         }
       )
-    }
 
   }
 
@@ -73,6 +73,7 @@ export class ResumeComponent implements OnInit {
     this.resumeService.updateResume(resume).subscribe({
       next:(resume:Resume)=>{
         console.log(resume);
+        window.location.reload();
       },
       error:(err:HttpErrorResponse) =>{
         alert(err.message);

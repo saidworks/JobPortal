@@ -56,7 +56,7 @@ export class JobListingsComponent implements OnInit {
         this.getJobListings();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
@@ -68,7 +68,7 @@ export class JobListingsComponent implements OnInit {
         this.getJobListings();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

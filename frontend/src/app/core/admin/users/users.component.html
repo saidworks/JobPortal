@@ -1,1 +1,21 @@
-<p>users works!</p>
+<div id="main-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Course</th>
+        <th scope="col">Campus</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of users">
+      <tr>
+        <td>{{user.firstName+" "+user.lastName}}</td>
+        <td>{{user.course}}</td>
+        <td>{{user.campus}}</td>
+        <td><a (click)="deleteUser(user.id)"><i class="fa fa-times"></i></a></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

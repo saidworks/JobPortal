@@ -54,7 +54,7 @@ export class AddressComponent implements OnInit {
   }
 
   public getAddress():void{
-      if(this.hasAddress){
+
         this.addressService.getAddress().subscribe(
           (response: Address)=>{
             this.address = response;
@@ -65,8 +65,6 @@ export class AddressComponent implements OnInit {
             console.log(error.message);
           }
         )
-      }
-
   }
 
   public updateAddress(address:Address):void{

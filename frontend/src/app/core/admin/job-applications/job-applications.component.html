@@ -1,1 +1,19 @@
-<p>job-applications works!</p>
+<div id="main-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Application Date</th>
+        <th scope="col">Resume</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let jobApplication of jobApplications">
+      <tr>
+        <th scope="row">number</th>
+        <td>{{jobApplication.applicationDate}}</td>
+        <td><a href="{{jobApplication.path}}" target="_blank">{{jobApplication.path}}</a></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

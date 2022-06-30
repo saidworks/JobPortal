@@ -10,13 +10,17 @@ import { JobApplicationComponent } from './core/user/job-application/job-applica
 import { DashboardComponent } from './core/user/dashboard/dashboard.component';
 import { ADashboardComponent } from './core/admin/dashboard/dashboard.component';
 import { JobApplicationsComponent } from './core/admin/job-applications/job-applications.component';
+import { LogoutComponent } from './core/components/logout/logout.component';
+import { UsersComponent } from './core/admin/users/users.component';
 const routes: Routes = [
   {path: 'signup', component: RegisterComponent},
   {path:'',component:LoginComponent},
+  {path:'logout',component:LogoutComponent},
   //admin paths
   {path:'admin/jobs',component:JobListingsComponent},
   {path:'admin',component:ADashboardComponent},
   {path:'admin/jobs/:id',component:JobApplicationsComponent},
+  {path:'admin/users',component:UsersComponent},
   //user paths
   {path:'user',component:DashboardComponent},
   {path:'user/resume',component:ResumeComponent},

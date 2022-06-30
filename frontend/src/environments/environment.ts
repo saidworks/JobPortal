@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: "http://localhost:8080/api/"
+  baseApiUrl: "http://localhost:8080/api/",
+  adminApiUrl: "http://localhost:8080/api/admin/",
+  userApiUrl: "http://localhost:8080/api/user/"
 };
 
 /*
