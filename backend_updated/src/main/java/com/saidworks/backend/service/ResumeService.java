@@ -43,6 +43,8 @@ public class ResumeService {
         CustomUserBean userDetails = (CustomUserBean) authentication.getPrincipal();
         String username = userDetails.getUsername();
         User user = userRepository.findByUsername(username).get();
+        System.out.println(user);
+        System.out.println(resumeRepository.findByUser(user));
         return resumeRepository.findByUser(user)
                 .map(resume -> mapToDTO(resume, new ResumeDTO()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
