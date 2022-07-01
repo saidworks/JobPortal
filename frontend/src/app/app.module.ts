@@ -26,6 +26,7 @@ import { ADashboardComponent } from './core/admin/dashboard/dashboard.component'
 import { LogoutComponent } from './core/components/logout/logout.component';
 import { UsersComponent } from './core/admin/users/users.component';
 import { JobApplicationsComponent } from './core/admin/job-applications/job-applications.component';
+import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfound.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { JobApplicationsComponent } from './core/admin/job-applications/job-appl
     ADashboardComponent,
     LogoutComponent,
     UsersComponent,
-    JobApplicationsComponent
+    JobApplicationsComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

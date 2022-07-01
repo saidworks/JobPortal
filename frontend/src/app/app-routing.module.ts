@@ -12,22 +12,24 @@ import { ADashboardComponent } from './core/admin/dashboard/dashboard.component'
 import { JobApplicationsComponent } from './core/admin/job-applications/job-applications.component';
 import { LogoutComponent } from './core/components/logout/logout.component';
 import { UsersComponent } from './core/admin/users/users.component';
+import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfound.component';
+import { AuthGuardGuard } from './core/services/auth-guard.guard';
 const routes: Routes = [
   {path: 'signup', component: RegisterComponent},
   {path:'',component:LoginComponent},
   {path:'logout',component:LogoutComponent},
   //admin paths
-  {path:'admin/jobs',component:JobListingsComponent},
-  {path:'admin',component:ADashboardComponent},
-  {path:'admin/jobs/:id',component:JobApplicationsComponent},
-  {path:'admin/users',component:UsersComponent},
+  {path:'admin/jobs',component:JobListingsComponent,canActivate:[AuthGuardGuard]},
+  {path:'admin',component:ADashboardComponent,canActivate:[AuthGuardGuard]},
+  {path:'admin/jobs/:id',component:JobApplicationsComponent,canActivate:[AuthGuardGuard]},
+  {path:'admin/users',component:UsersComponent,canActivate:[AuthGuardGuard]},
   //user paths
-  {path:'user',component:DashboardComponent},
-  {path:'user/resume',component:ResumeComponent},
-  {path:'user/address',component:AddressComponent},
-  {path:'user/jobs',component:JobsComponent},
-  {path:'user/jobs/:id',component:JobApplicationComponent},
-
+  {path:'user',component:DashboardComponent,canActivate:[AuthGuardGuard]},
+  {path:'user/resume',component:ResumeComponent,canActivate:[AuthGuardGuard]},
+  {path:'user/address',component:AddressComponent,canActivate:[AuthGuardGuard]},
+  {path:'user/jobs',component:JobsComponent,canActivate:[AuthGuardGuard]},
+  {path:'user/jobs/:id',component:JobApplicationComponent,canActivate:[AuthGuardGuard]},
+  { path: '**', component: PagenotfoundComponent,canActivate:[AuthGuardGuard] },  // Wildcard route for a 404 page,
 ];
 
 @NgModule({
