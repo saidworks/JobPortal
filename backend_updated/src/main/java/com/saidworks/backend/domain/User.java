@@ -5,18 +5,26 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+
 @JsonIgnoreProperties({ "roles", "candidateJobApplications", })
 public class User {
+
+    public User( String email, String password, String username, String firstName, String lastName, String course, String campus) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.course = course;
+        this.campus = campus;
+    }
 
     @Id
     @Column(nullable = false, updatable = false)
