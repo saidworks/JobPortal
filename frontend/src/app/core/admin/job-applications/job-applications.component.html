@@ -7,9 +7,9 @@
         <th scope="col">Resume</th>
       </tr>
     </thead>
-    <tbody *ngFor="let jobApplication of jobApplications">
+    <tbody *ngFor="let jobApplication of jobApplications; let i = index">
       <tr>
-        <th scope="row">number</th>
+        <th scope="row"> {{i+1}}</th>
         <td>{{jobApplication.applicationDate}}</td>
         <td><a href="{{jobApplication.path}}" target="_blank">{{jobApplication.path}}</a></td>
       </tr>

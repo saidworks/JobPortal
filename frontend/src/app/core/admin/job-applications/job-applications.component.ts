@@ -12,6 +12,7 @@ import { JobApplicationsService } from '../services/job-applications.service';
 export class JobApplicationsComponent implements OnInit {
   jobListingsId!:number;
   jobApplications!: JobApplications[];
+  count:number = 0 ;
   constructor(private jobApplicationsService:JobApplicationsService,
               private activatedRoute:ActivatedRoute) { }
 

@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
         username: new FormControl(null,Validators.required),
         password: new FormControl(null,Validators.required)
     });
+    if(this.isLoggedIn){
+      this.router.navigate(["/user"]);
+    }
   }
 
   onSubmit(){
@@ -41,19 +44,21 @@ export class LoginComponent implements OnInit {
   }
 
   profileSwitch(){
-    let roles:string[] = JSON.parse(sessionStorage.getItem("roles")!);
-    console.log(roles)
-    if(roles.length>0 && this.isLoggedIn){
-      for(let role of roles){
-        if(role=="ROLE_ADMIN"){
-          console.log("Admin");
-          this.router.navigate(['/admin']);
-        }
-        else{
-          this.router.navigate(['/user']);
-        }
-      }
+    let roles:Array<String> = JSON.parse(sessionStorage.getItem("roles")!);
+    console.log(roles.includes("ROLE_ADMIN") && this.isLoggedIn)
+    if(roles.includes("ROLE_ADMIN")){
+      // for(let role of roles){
+      //   if(role.match("ROLE_ADMIN")){
+      //     console.log("Admin");
+      //     this.router.navigate(['/admin']);
+      //     break;
+      //   }
+      // }
+           console.log("Admin");
+          return this.router.navigate(['/admin']);
    }
+   console.log("user");
+   return this.router.navigate(['/user']);
   }
 
 }

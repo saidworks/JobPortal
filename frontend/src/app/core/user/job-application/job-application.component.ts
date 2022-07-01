@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JobApplicationService } from '../services/job-application.service';
 import { JobApplication } from '../models/job-application.model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,9 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JobApplicationComponent implements OnInit {
   jobApplicationForm!: FormGroup;
   jobListingsId!:number;
-
+  successfulApplication: boolean = false;
   jobApplication = new JobApplication(1,new Date());
-  constructor(private jobApplicationService:JobApplicationService, private activatedRoute:ActivatedRoute) { }
+  constructor(private jobApplicationService:JobApplicationService, private activatedRoute:ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.jobListingsId = this.activatedRoute.snapshot.params['id'];
@@ -33,10 +34,15 @@ export class JobApplicationComponent implements OnInit {
                               .subscribe({
                                 next:(response:JobApplication)=>{
                                   console.log(JobApplication)
+                                  this.successfulApplication = true;
+                                  setTimeout(() => {
+                                    this.router.navigate(['/user/jobs']);
+                                }, 5000);  //5s
                                 },
                                 error:(err:HttpErrorResponse)=>{
                                   console.log(err.message);
                                 }
                               });
   }
+
 }
