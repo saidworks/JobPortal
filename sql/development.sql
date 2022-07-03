@@ -4,14 +4,14 @@
 
 
 
--- INSERT INTO `jobportalonprogress`.`role`
--- (`id`,
--- `role_name`)
--- VALUES
--- (2,
--- "ROLE_ADMIN");
---  INSERT INTO `jobportalonprogress`.`role`
---  (`id`,
--- `role_name`)
--- VALUES(1,
--- "ROLE_USER")
+INSERT INTO `jobportalonprogress`.`role`
+(`id`,
+`role_name`)
+VALUES
+(2,
+"ROLE_ADMIN");
+ INSERT INTO `jobportalonprogress`.`role`
+ (`id`,
+`role_name`)
+VALUES(1,
+"ROLE_USER")
