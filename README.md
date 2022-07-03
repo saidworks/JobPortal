@@ -1,6 +1,6 @@
 ﻿# Per Scholas' Job 
 <img src="./project.PNG">
-> This web app allows users to sign up, add their resume and address information, view job listings and apply. In addition to this, a user with admin role can create job listings, view job applications and delete users. 
+ This web app allows users to sign up, add their resume and address information, view job listings and apply. In addition to this, a user with admin role can create job listings, view job applications and delete users. 
 
 ## Installation 
 To run this app, you will need:   
